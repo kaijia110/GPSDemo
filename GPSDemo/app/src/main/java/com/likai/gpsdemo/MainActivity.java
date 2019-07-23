@@ -19,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
             v.setSystemUiVisibility(android.view.View.GONE);
         } else if (Build.VERSION.SDK_INT >= 19) {
             android.view.View decorView = getWindow().getDecorView();
-            int uiOptions =
-                    android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            int uiOptions = android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                             | android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
                             | android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
