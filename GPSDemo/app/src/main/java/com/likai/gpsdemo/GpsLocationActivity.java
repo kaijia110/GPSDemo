@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,8 @@ public class GpsLocationActivity extends AppCompatActivity implements Permission
     EditText ipText;
     @BindView(R.id.button_turn)
     Button buttonTurn;
+    @BindView(R.id.scheme)
+    Button scheme;
     private LocationManager mLocationManager;
 
     private String[] permissions = {
@@ -191,9 +194,18 @@ public class GpsLocationActivity extends AppCompatActivity implements Permission
         finish();
     }
 
-    @OnClick(R.id.button_turn)
-    public void onClick() {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+    @OnClick({R.id.button_turn, R.id.scheme})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_turn:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.scheme:
+                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("qlhx://app:8088/regist"));
+                startActivity(intent2);
+                break;
+        }
     }
+
 }
