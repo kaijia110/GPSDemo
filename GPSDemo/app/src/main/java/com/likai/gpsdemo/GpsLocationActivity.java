@@ -3,6 +3,7 @@ package com.likai.gpsdemo;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * GPS定位
@@ -45,6 +47,8 @@ public class GpsLocationActivity extends AppCompatActivity implements Permission
     Button button;
     @BindView(R.id.ip_text)
     EditText ipText;
+    @BindView(R.id.button_turn)
+    Button buttonTurn;
     private LocationManager mLocationManager;
 
     private String[] permissions = {
@@ -62,7 +66,7 @@ public class GpsLocationActivity extends AppCompatActivity implements Permission
         ButterKnife.bind(this);
         helper = new SharedPreferencesHelper(this, "shareFile");
         String ipaddress = (String) helper.getSharedPreference("ipaddress", "202.142.28.62:8085");
-        if (!ipaddress.equals("")){
+        if (!ipaddress.equals("")) {
             ipText.setText(ipaddress);
         }
     }
@@ -108,7 +112,7 @@ public class GpsLocationActivity extends AppCompatActivity implements Permission
             button.setText("定位成功");
 //            202.142.28.62:8085
             String ipAddress = ipText.getText().toString();
-            helper.put("ipaddress",ipAddress);
+            helper.put("ipaddress", ipAddress);
             String url = "http://" + ipAddress + "/api/v1/Erc3pxNX0HdVAnQE78fV/telemetry";
             Log.e("xyh", "定位方式：" + location.getProvider());
             type.setText("定位方式：" + location.getProvider());
@@ -185,5 +189,11 @@ public class GpsLocationActivity extends AppCompatActivity implements Permission
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @OnClick(R.id.button_turn)
+    public void onClick() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }
